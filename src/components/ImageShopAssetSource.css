@@ -1,0 +1,4 @@
+.widget > iframe {
+  height: calc(100vh - 9rem);
+  width: 100%;
+}
