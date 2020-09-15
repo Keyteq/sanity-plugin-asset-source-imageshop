@@ -20,7 +20,7 @@ All configuration can be found within `config/asset-source-imageshop.json`.
 
 | Configuration key | Description |   Type         |   Default value   |
 | ------------- | ------------- | ---------------- | ----------------- |
-| IMAGESHOPTOKEN  | Required. Token to communicate with imageshop.  | string |  |
+| **IMAGESHOPTOKEN**  | Required. Token to communicate with imageshop.  | string |  |
 | IMAGESHOPINTERFACENAME  |  Standard interface used when searching images.  | string |  |
 | SHOWSIZEDIALOGUE  | Indicates whether the size dialogue should be shown. |  true|false  |  true |
 | SHOWSIZEDIALOGUE  | Indicates whether the crop dialogue should be shown. |  true|false  |  true |

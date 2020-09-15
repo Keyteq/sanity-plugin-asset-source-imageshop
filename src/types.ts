@@ -1,18 +1,7 @@
 export type Asset = {
   kind: 'url' | 'base64' | 'file' | 'assetDocumentId'
   value: string | File
-  assetDocumentProps?: {
-    originalFileName?: string
-    label?: string
-    title?: string
-    description?: string
-    source?: {
-      id: string
-      name: string
-      url?: string
-    }
-    creditLine?: string
-  }
+  assetDocumentProps?: AssetDocumentProps
 }
 
 export type AssetDocument = {
@@ -55,5 +44,18 @@ export type ImageShopAsset = {
 }
 
 
+export type AssetDocumentProps = {
+  originalFileName?: string
+  label?: string
+  title?: string
+  description?: string
+  source?: {
+    id: string
+    name: string
+    url?: string
+  }
+  creditLine?: string
+}
 
-export type ImageShopAssetSourceIdData = { public_id: string; resource_type: string; type: string }
+
+export type ImageShopIFrameEventData = [string, string, number, number]

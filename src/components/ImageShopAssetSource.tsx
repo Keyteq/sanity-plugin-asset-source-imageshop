@@ -4,7 +4,13 @@ import Dialog from 'part:@sanity/components/dialogs/fullscreen'
 import Spinner from 'part:@sanity/components/loading/spinner'
 import pluginConfig from 'config:asset-source-imageshop'
 
-import {Asset, AssetDocument, ImageShopAsset} from '../types'
+import {
+  Asset,
+  AssetDocument,
+  AssetDocumentProps,
+  ImageShopAsset,
+  ImageShopIFrameEventData
+} from '../types'
 import styles from './ImageShopAssetSource.css'
 
 declare global {
@@ -27,19 +33,6 @@ type State = {
   hasConfig: boolean
 }
 
-type AssetDocumentProps = {
-  originalFileName?: string
-  label?: string
-  title?: string
-  description?: string
-  source?: {
-    id: string
-    name: string
-    url?: string
-  }
-  creditLine?: string
-}
-
 
 export default class ImageShopAssetSource extends React.Component<Props, State> {
   static defaultProps = {
@@ -58,17 +51,18 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
 
   componentDidMount() {
     const hasConfig = !!(pluginConfig.IMAGESHOPTOKEN)
-    this.setState({ hasConfig }, () => hasConfig && this.setupMediaLibrary())
+    this.setState({hasConfig}, () => hasConfig && this.setupMediaLibrary())
 
     window.addEventListener("message", this.handleEvent)
   }
+
   componentWillUnmount(): void {
 
     window.removeEventListener("message", this.handleEvent)
   }
 
   private setupMediaLibrary = () => {
-    const { selectedAssets, selectionType } = this.props
+    const {selectedAssets, selectionType} = this.props
     const firstSelectedAsset = selectedAssets ? selectedAssets[0] : null
 
     const iframe: ChildNode | null = this.contentRef.current && this.contentRef.current.firstChild
@@ -87,13 +81,13 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
     if (typeof event.data !== 'string') {
       return;
     }
-    const [imageShopDataString, title, width, height] = event.data.split(";")
+    const [imageShopDataString, title, width, height] = event.data.split(";") as ImageShopIFrameEventData
 
     if (!imageShopDataString) {
       return;
     }
 
-    const imageShopData = JSON.parse(imageShopDataString) as ImageShopAsset
+    const imageShopData = JSON.parse(imageShopDataString) as ImageShopAsset;
 
     // Make a check, is this even from imageshop ? Should have .documentId and parsed the first part as json.
     if (!imageShopData || !imageShopData.documentId) {
@@ -101,22 +95,23 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
     }
 
 
-    const ASSET_TEXT_LANGUAGE = pluginConfig.SANITY_ASSET_TEXT_LANGUAGE || 'no'
-      const textObject = imageShopData.text[ASSET_TEXT_LANGUAGE];
-      const assetDocumentProps: AssetDocumentProps = {
-        source: {
-          id: imageShopData.documentId,
-          name: `imageshop`,
-        }
+    const ASSET_TEXT_LANGUAGE = pluginConfig.SANITY_ASSET_TEXT_LANGUAGE || 'no';
+    const textObject = imageShopData.text[ASSET_TEXT_LANGUAGE];
+    const assetDocumentProps: AssetDocumentProps = {
+      source: {
+        id: imageShopData.documentId,
+        name: `imageshop`,
       }
-      if (title) {
-        assetDocumentProps.title = title
-      }
-      if (textObject?.description) {
-        assetDocumentProps.description = textObject.description
-      }
-      if (textObject?.credits) {
-        assetDocumentProps.creditLine = textObject.credits
+    };
+
+    if (title) {
+      assetDocumentProps.title = title;
+    }
+    if (textObject?.description) {
+      assetDocumentProps.description = textObject.description;
+    }
+    if (textObject?.credits) {
+      assetDocumentProps.creditLine = textObject.credits;
     }
     const selectedFiles: Asset[] = [
       {
@@ -124,7 +119,7 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
         value: imageShopData.image.file,
         assetDocumentProps: assetDocumentProps
       }
-    ]
+    ];
     this.props.onSelect(selectedFiles)
   }
 
@@ -143,11 +138,11 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
           folder.
         </p>
         <p>
-          You can get your credentials by visiting the{' '}
-          <a href="https://imageshop.com/console" rel="noopener noreferrer" target="_blank">
-            ImageShop console
+          You can get your credentials by visiting {' '}
+          <a href="https://www.imageshop.no/" rel="noopener noreferrer" target="_blank">
+            ImageShop
           </a>{' '}
-          and get your Cloud name and API key.
+          and get your token.
         </p>
       </div>
     )
@@ -168,22 +163,22 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
       'REQUIREDUPLOADFIELDS': pluginConfig.REQUIREDUPLOADFIELDS || '',
       'UPLOADFIELDLANGUAGES': 'no,en',
       'IMAGESHOPTOKEN': pluginConfig.IMAGESHOPTOKEN,
-      'IMAGESHOPSIZE': pluginConfig.IMAGESHOPSIZE,
+      'IMAGESHOPSIZE': pluginConfig.IMAGESHOPSIZE || '',
       'FORMAT': 'json',
     }
-    const url = `${this.imageshopDomain}?${ new URLSearchParams(iframeParams)}`
+    const url = `${this.imageshopDomain}?${new URLSearchParams(iframeParams)}`
 
-    const { hasConfig, loadingMessage } = this.state
+    const {hasConfig, loadingMessage} = this.state
     return (
       <Dialog title="Select image from ImageShop" onClose={this.handleClose} isOpen>
-        {hasConfig && loadingMessage && <Spinner fullscreen center message={loadingMessage} />}
+        {hasConfig && loadingMessage && <Spinner fullscreen center message={loadingMessage}/>}
         {hasConfig && (
           <div
             ref={this.contentRef}
             className={styles.widget}
             id={`imageshopWidget-${this.domId}`}
           >
-            <iframe width="100%" src={url} />
+            <iframe width="100%" src={url}/>
           </div>
         )}
         {!hasConfig && this.renderConfigWarning()}
