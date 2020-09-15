@@ -2,16 +2,39 @@
 
 Access and select photos from your ImageShop account within the Sanity Studio.
 
-[![Build Status](https://travis-ci.org/sanity-io/sanity-plugin-asset-source-imageshop.svg?branch=master)](https://travis-ci.org/sanity-io/sanity-plugin-asset-source-imageshop)
-
-
 ## Installation
 
 `sanity install asset-source-imageshop`
 
-Edit the config file found in `./config/asset-source-imageshop.json` with your ImageShop Cloud name and API key.
+Edit the config file found in `./config/asset-source-imageshop.json` with your Image shop token ("IMAGESHOPTOKEN").
 
-You can find these in the ImageShop Console: https://imageshop.com/console
+You can find the credentials in the ImageShop Admin.
+
+## Configuration
+
+
+There are many ways to configure the interface for image selection.
+
+All configuration can be found within `config/asset-source-imageshop.json`.
+
+
+| Configuration key | Description |   Type         |   Default value   |
+| ------------- | ------------- | ---------------- | ----------------- |
+| IMAGESHOPTOKEN  | Required. Token to communicate with imageshop.  | string |  |
+| IMAGESHOPINTERFACENAME  |  Standard interface used when searching images.  | string |  |
+| SHOWSIZEDIALOGUE  | Indicates whether the size dialogue should be shown. |  true|false  |  true |
+| SHOWSIZEDIALOGUE  | Indicates whether the crop dialogue should be shown. |  true|false  |  true |
+| IMAGESHOPDOCUMENTPREFIX  | Standrad document code prefix used when uploading images. |  string  |  |
+| IMAGESHOPSIZE  | String in the format <Size name 1>;<width1>x<height1>:<Size name 2>;<width2>x<height2>... Predefined sizes the user can choose from. |  string  |  |
+| CULTURE  | Language for the client. Supports en-US and nb-NO. Norwegian is default (nb-NO) |  string  | nb-NO |
+| PROFILEID  | 	Name of a profile, which has to be created by Screentek, which will return several different sizes and aspect ratios. IMAGESHOPSIZE can not be used together with a profile, and showing size dialogue or crop dialogue doens't make sence when using profiles. |  string  |  |
+| REQUIREDUPLOADFIELDS  | String indicating upload fields which are required, separated by komma. Possible values: name, description, rights, credits, tags |  string  |  |
+| UPLOADFIELDLANGUAGES  | List of languages which should be shown for name, description etc. Default = no,en. |  string  |  |
+| SELECTEDCATEGORIES  | List of category-ids separated with ";" |  string  |  |
+| FREECROP  | If true, free croping is by default selected when selecting an image. |  true|false  | false |
+
+
+
 
 ## Part name
 
@@ -19,15 +42,6 @@ If you need to customize available asset sources, the plugin part name for this 
 
 `part:sanity-plugin-asset-source-imageshop/image-asset-source`
 
-## Finding back to the original asset in ImageShop (public_id, resource_type, type)
-This info exists on the asset document, however it's base64-encoded in the `source.id` field.
-It's base64 encoded because Sanity asset-source plugins have a generic way of identifying assets (provider name and id), and ImageShop is a bit special needing to have three items to programatically find back to the original image, as opposed to just an id as most other sources do.
-
-```
-JSON.parse(atob(source.id))
-
-> {"public_id":"samples/imageshop-group","resource_type":"image","type":"upload"}
-```
 
 ## Developing on this module
 

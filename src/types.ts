@@ -29,13 +29,29 @@ export type AssetDocument = {
   originalFilename?: string
 }
 
+type ImageShopLanguages = string
+
 export type ImageShopAsset = {
-  secure_url: string
-  format: string
-  resource_type: string
-  type: string
-  public_id: string
-  derived: { url: string; secure_url: string }[]
+  documentId: string
+  code: string
+  extraInfo: null | string
+  AuthorName: null | string
+  image: {
+    file: string
+    width: number
+    height: number
+    thumbnail: string
+  }
+  text: {
+    [key in ImageShopLanguages]?: {
+      title: string
+      description: string
+      rights: string
+      credits: string
+      tags: string
+      categories: string[]
+    }
+  }
 }
 
 

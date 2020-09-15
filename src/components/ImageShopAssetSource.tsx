@@ -4,7 +4,7 @@ import Dialog from 'part:@sanity/components/dialogs/fullscreen'
 import Spinner from 'part:@sanity/components/loading/spinner'
 import pluginConfig from 'config:asset-source-imageshop'
 
-import { Asset, AssetDocument } from '../types'
+import {Asset, AssetDocument, ImageShopAsset} from '../types'
 import styles from './ImageShopAssetSource.css'
 
 declare global {
@@ -27,6 +27,18 @@ type State = {
   hasConfig: boolean
 }
 
+type AssetDocumentProps = {
+  originalFileName?: string
+  label?: string
+  title?: string
+  description?: string
+  source?: {
+    id: string
+    name: string
+    url?: string
+  }
+  creditLine?: string
+}
 
 
 export default class ImageShopAssetSource extends React.Component<Props, State> {
@@ -81,22 +93,36 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
       return;
     }
 
-    const imageShopData = JSON.parse(imageShopDataString)
+    const imageShopData = JSON.parse(imageShopDataString) as ImageShopAsset
 
+    // Make a check, is this even from imageshop ? Should have .documentId and parsed the first part as json.
     if (!imageShopData || !imageShopData.documentId) {
       return;
     }
+
+
+    const ASSET_TEXT_LANGUAGE = pluginConfig.SANITY_ASSET_TEXT_LANGUAGE || 'no'
+      const textObject = imageShopData.text[ASSET_TEXT_LANGUAGE];
+      const assetDocumentProps: AssetDocumentProps = {
+        source: {
+          id: imageShopData.documentId,
+          name: `imageshop`,
+        }
+      }
+      if (title) {
+        assetDocumentProps.title = title
+      }
+      if (textObject?.description) {
+        assetDocumentProps.description = textObject.description
+      }
+      if (textObject?.credits) {
+        assetDocumentProps.creditLine = textObject.credits
+    }
     const selectedFiles: Asset[] = [
       {
-        kind: 'url',
+        kind: 'url', // 'url' does not work due to imageshop does not contain cors
         value: imageShopData.image.file,
-        assetDocumentProps: {
-          source: {
-            id: imageShopData.documentId,
-            name: `imageshop`,
-            url: imageShopData.image.file
-          }
-        }
+        assetDocumentProps: assetDocumentProps
       }
     ]
     this.props.onSelect(selectedFiles)
@@ -132,8 +158,18 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
 
     const iframeParams = {
       'IFRAMEINSERT': 'true',
+      'IMAGESHOPINTERFACENAME': pluginConfig.IMAGESHOPINTERFACENAME || '',
+      'SHOWSIZEDIALOGUE': pluginConfig.SHOWSIZEDIALOGUE || 'true',
+      'SHOWCROPDIALOGUE': pluginConfig.SHOWCROPDIALOGUE || 'true',
+      'FREECROP': pluginConfig.FREECROP || '',
+      'IMAGESHOPDOCUMENTPREFIX': pluginConfig.IMAGESHOPDOCUMENTPREFIX || '',
+      'CULTURE': pluginConfig.CULTURE || 'nb-NO',
+      'PROFILEID': pluginConfig.PROFILEID || '',
+      'REQUIREDUPLOADFIELDS': pluginConfig.REQUIREDUPLOADFIELDS || '',
+      'UPLOADFIELDLANGUAGES': 'no,en',
       'IMAGESHOPTOKEN': pluginConfig.IMAGESHOPTOKEN,
-      'FORMAT': 'json'
+      'IMAGESHOPSIZE': pluginConfig.IMAGESHOPSIZE,
+      'FORMAT': 'json',
     }
     const url = `${this.imageshopDomain}?${ new URLSearchParams(iframeParams)}`
 
