@@ -17,7 +17,7 @@
     "sanity.json",
     "config.dist.json"
   ],
-  "author": "Sanity.io <hello@sanity.io>",
+  "author": "Keyteq <hei@keyteq.no>",
   "repository": {
     "type": "git",
     "url": ""
@@ -30,9 +30,9 @@
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/sanity-io/sanity-plugin-asset-source-imageshop/issues"
+    "url": "https://github.com/Keyteq/sanity-plugin-asset-source-imageshop/issues"
   },
-  "homepage": "https://github.com/sanity-io/sanity-plugin-asset-source-imageshop#readme",
+  "homepage": "https://github.com/Keyteq/sanity-plugin-asset-source-imageshop/#readme",
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
