@@ -75,5 +75,5 @@ When you are done and have published your new version, you can run `npm unlink` 
 
 
 ## Futher reading
-* https://imageshop.com/documentation/media_library_widget
+* https://www.imageshop.no/
 * https://www.sanity.io/docs/custom-asset-sources
