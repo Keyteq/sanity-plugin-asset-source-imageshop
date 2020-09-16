@@ -8,9 +8,9 @@ Access and select photos from your ImageShop account within the Sanity Studio.
 
 ## Installation
 
-`sanity install asset-source-imageshop`
+`sanity install @keyteq/sanity-plugin-asset-source-imageshop`
 
-Edit the config file found in `./config/asset-source-imageshop.json` with your Image shop token ("IMAGESHOPTOKEN").
+Edit the config file found in your sanity project `./config/@keyteq/sanity-plugin-asset-source-imageshop.json` with your Image shop token ("IMAGESHOPTOKEN").
 
 You can find the credentials in the ImageShop Admin.
 

@@ -47,7 +47,7 @@ declare module 'part:@sanity/components/dialogs/fullscreen-style' {
   export default shim
 }
 
-declare module 'config:asset-source-imageshop' {
+declare module 'config:@keyteq/sanity-plugin-asset-source-imageshop' {
   const shim: any
   export default shim
 }

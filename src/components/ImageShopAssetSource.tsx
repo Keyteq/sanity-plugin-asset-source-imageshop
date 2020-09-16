@@ -2,7 +2,7 @@
 import React from 'react'
 import Dialog from 'part:@sanity/components/dialogs/fullscreen'
 import Spinner from 'part:@sanity/components/loading/spinner'
-import pluginConfig from 'config:asset-source-imageshop'
+import pluginConfig from 'config:@keyteq/sanity-plugin-asset-source-imageshop'
 
 import {
   Asset,
