@@ -1,5 +1,5 @@
 {
-  "name": "sanity-plugin-asset-source-imageshop",
+  "name": "@keyteq/sanity-plugin-asset-source-imageshop",
   "version": "0.1.0",
   "description": "Sanity Studio plugin for using ImageShop to select images from",
   "keywords": [

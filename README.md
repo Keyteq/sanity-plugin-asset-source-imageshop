@@ -2,6 +2,10 @@
 
 Access and select photos from your ImageShop account within the Sanity Studio.
 
+
+[![Build Status](https://travis-ci.org/Keyteq/sanity-plugin-asset-source-imageshop.svg?branch=master)](https://travis-ci.org/sanity-io/sanity-plugin-asset-source-cloudinary)
+
+
 ## Installation
 
 `sanity install asset-source-imageshop`
@@ -55,19 +59,19 @@ To simulate using your development version as a real module inside a studio, you
 **With the mono-repo's `test-studio`:**
 
   * Bootstrap the monorepo: `npm run bootstrap`
-  * Add `sanity-plugin-asset-source-imageshop` with the current version number to `package.json` in the `test-studio` root folder (but don't run `npm install` afterwards)
-  * Run `npm link sanity-plugin-asset-source-imageshop` inside the mono-repo's root.
+  * Add `@keyteq/sanity-plugin-asset-source-imageshop` with the current version number to `package.json` in the `test-studio` root folder (but don't run `npm install` afterwards)
+  * Run `npm link @keyteq/sanity-plugin-asset-source-imageshop` inside the mono-repo's root.
   * Add `asset-source-imageshop` to the list of the studios plugins in `sanity.json`.
   * Restart the `test-studio`
 
 **With a regular Sanity Studio:**
   * Run `npm install`
-  * Add `sanity-plugin-asset-source-imageshop` with the current version number to `package.json`.
-  * Run `npm link sanity-plugin-asset-source-imageshop`
+  * Add `@keyteq/sanity-plugin-asset-source-imageshop` with the current version number to `package.json`.
+  * Run `npm link @keyteq/sanity-plugin-asset-source-imageshop`
   * Add `asset-source-imageshop` to the list of the studios plugins in `sanity.json`.
   * Start the studio
 
-When you are done and have published your new version, you can run `npm unlink` inside this repo, and `npm unlink sanity-plugin-asset-source-imageshop` inside the mono-repo or studio to get back to the normal state. Then run `npm run bootstrap` for the mono-repo or `npm install` inside the regular studio to use the published version.
+When you are done and have published your new version, you can run `npm unlink` inside this repo, and `npm unlink @keyteq/sanity-plugin-asset-source-imageshop` inside the mono-repo or studio to get back to the normal state. Then run `npm run bootstrap` for the mono-repo or `npm install` inside the regular studio to use the published version.
 
 
 ## Futher reading
