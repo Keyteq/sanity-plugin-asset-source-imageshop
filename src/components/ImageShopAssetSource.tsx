@@ -33,6 +33,8 @@ type State = {
   hasConfig: boolean
 }
 
+const IMAGESHOP_CLIENT = "https://client.imageshop.no"
+
 
 export default class ImageShopAssetSource extends React.Component<Props, State> {
   static defaultProps = {
@@ -47,7 +49,7 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
   private contentRef = React.createRef<HTMLDivElement>()
 
   private domId = Date.now()
-  private imageshopDomain = "https://client.imageshop.no/InsertImage2.aspx"
+  private imageshopDomain = `${IMAGESHOP_CLIENT}/InsertImage2.aspx`
 
   componentDidMount() {
     const hasConfig = !!(pluginConfig.IMAGESHOPTOKEN)
@@ -74,11 +76,13 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
   }
 
   handleEvent = (event: any) => {
-    console.log(event)
     if (!event || !event.data) {
       return;
     }
     if (typeof event.data !== 'string') {
+      return;
+    }
+    if (event.origin !== IMAGESHOP_CLIENT) {
       return;
     }
     const [imageShopDataString, title, width, height] = event.data.split(";") as ImageShopIFrameEventData
@@ -93,7 +97,6 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
     if (!imageShopData || !imageShopData.documentId) {
       return;
     }
-
 
     const ASSET_TEXT_LANGUAGE = pluginConfig.SANITY_ASSET_TEXT_LANGUAGE || 'no';
     const textObject = imageShopData.text[ASSET_TEXT_LANGUAGE];
@@ -134,7 +137,7 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
         <h2>Missing configuration</h2>
         <p>You must first configure the plugin with your ImageShop credentials</p>
         <p>
-          Edit the <code>./config/asset-source-imageshop.json</code> file in your Sanity Studio
+          Edit the <code>./config/@keyteq/sanity-plugin-asset-source-imageshop.json</code> file in your Sanity Studio
           folder.
         </p>
         <p>
@@ -153,17 +156,19 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
 
     const iframeParams = {
       'IFRAMEINSERT': 'true',
+      'HIDEIMAGEINFO': 'true',
+      'INSERTIMIDIATELY': 'true',
+      'SHOWSIZEDIALOGUE': 'true',
+      'SHOWCROPDIALOGUE': 'true',
+      'FREECROP': 'true',
       'IMAGESHOPINTERFACENAME': pluginConfig.IMAGESHOPINTERFACENAME || '',
-      'SHOWSIZEDIALOGUE': pluginConfig.SHOWSIZEDIALOGUE || 'true',
-      'SHOWCROPDIALOGUE': pluginConfig.SHOWCROPDIALOGUE || 'true',
-      'FREECROP': pluginConfig.FREECROP || '',
       'IMAGESHOPDOCUMENTPREFIX': pluginConfig.IMAGESHOPDOCUMENTPREFIX || '',
       'CULTURE': pluginConfig.CULTURE || 'nb-NO',
       'PROFILEID': pluginConfig.PROFILEID || '',
       'REQUIREDUPLOADFIELDS': pluginConfig.REQUIREDUPLOADFIELDS || '',
-      'UPLOADFIELDLANGUAGES': 'no,en',
+      'UPLOADFIELDLANGUAGES': pluginConfig.UPLOADFIELDLANGUAGES || 'no,en',
       'IMAGESHOPTOKEN': pluginConfig.IMAGESHOPTOKEN,
-      'IMAGESHOPSIZE': pluginConfig.IMAGESHOPSIZE || '',
+      'IMAGESHOPSIZES': `${pluginConfig.IMAGE_ALIAS || 'Large'};${pluginConfig.IMAGE_MAX_SIZE || '2048x2048'}`,
       'FORMAT': 'json',
     }
     const url = `${this.imageshopDomain}?${new URLSearchParams(iframeParams)}`

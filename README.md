@@ -25,17 +25,15 @@ All configuration can be found within `config/asset-source-imageshop.json`.
 | Configuration key | Description |   Type         |   Default value   |
 | ------------- | ------------- | ---------------- | ----------------- |
 | **IMAGESHOPTOKEN**  | Required. Token to communicate with imageshop.  | string |  |
+| IMAGE_MAX_SIZE  | Max size of the image returned from imageshop to sanity. Format: WxH |  string  |  2048x2048 |
+| IMAGE_ALIAS  | Imageshop alias for permalink of image |  string  |  "Large" |
 | IMAGESHOPINTERFACENAME  |  Standard interface used when searching images.  | string |  |
-| SHOWSIZEDIALOGUE  | Indicates whether the size dialogue should be shown. |  true|false  |  true |
-| SHOWSIZEDIALOGUE  | Indicates whether the crop dialogue should be shown. |  true|false  |  true |
 | IMAGESHOPDOCUMENTPREFIX  | Standrad document code prefix used when uploading images. |  string  |  |
-| IMAGESHOPSIZE  | String in the format <Size name 1>;<width1>x<height1>:<Size name 2>;<width2>x<height2>... Predefined sizes the user can choose from. |  string  |  |
-| CULTURE  | Language for the client. Supports en-US and nb-NO. Norwegian is default (nb-NO) |  string  | nb-NO |
+| CULTURE  | Language for the client. Supports en-US and nb-NO. Norwegian is default (nb-NO) |  string  | "nb-NO" |
 | PROFILEID  | 	Name of a profile, which has to be created by Screentek, which will return several different sizes and aspect ratios. IMAGESHOPSIZE can not be used together with a profile, and showing size dialogue or crop dialogue doens't make sence when using profiles. |  string  |  |
 | REQUIREDUPLOADFIELDS  | String indicating upload fields which are required, separated by komma. Possible values: name, description, rights, credits, tags |  string  |  |
 | UPLOADFIELDLANGUAGES  | List of languages which should be shown for name, description etc. Default = no,en. |  string  |  |
-| SELECTEDCATEGORIES  | List of category-ids separated with ";" |  string  |  |
-| FREECROP  | If true, free croping is by default selected when selecting an image. |  true|false  | false |
+| SANITY_ASSET_TEXT_LANGUAGE | What language to store in sanity, from the title, description and credit fields | string | "no" |
 
 
 
