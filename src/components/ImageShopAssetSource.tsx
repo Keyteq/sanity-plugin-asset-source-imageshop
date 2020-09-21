@@ -183,7 +183,7 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
             className={styles.widget}
             id={`imageshopWidget-${this.domId}`}
           >
-            <iframe width="100%" src={url}/>
+            <iframe frameBorder={0} width="100%" src={url}/>
           </div>
         )}
         {!hasConfig && this.renderConfigWarning()}
