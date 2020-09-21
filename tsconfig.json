@@ -45,7 +45,7 @@
       "part:@sanity/components/buttons/button-grid": [
         "./node_modules/@sanity/components/lib/buttons/ButtonGrid.js"
       ],
-      "config:@keyteq/sanity-plugin-asset-source-imageshop": [
+      "config:@labs-tech/sanity-plugin-asset-source-imageshop": [
         "./config.dist.json"
       ]
 

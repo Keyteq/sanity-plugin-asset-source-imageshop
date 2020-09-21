@@ -2,7 +2,7 @@
 import React from 'react'
 import Dialog from 'part:@sanity/components/dialogs/fullscreen'
 import Spinner from 'part:@sanity/components/loading/spinner'
-import pluginConfig from 'config:@keyteq/sanity-plugin-asset-source-imageshop'
+import pluginConfig from 'config:@labs-tech/sanity-plugin-asset-source-imageshop'
 
 import {
   Asset,
@@ -137,7 +137,7 @@ export default class ImageShopAssetSource extends React.Component<Props, State> 
         <h2>Missing configuration</h2>
         <p>You must first configure the plugin with your ImageShop credentials</p>
         <p>
-          Edit the <code>./config/@keyteq/sanity-plugin-asset-source-imageshop.json</code> file in your Sanity Studio
+          Edit the <code>./config/@labs-tech/sanity-plugin-asset-source-imageshop.json</code> file in your Sanity Studio
           folder.
         </p>
         <p>

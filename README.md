@@ -8,9 +8,9 @@ Access and select photos from your ImageShop account within the Sanity Studio.
 
 ## Installation
 
-`sanity install @keyteq/sanity-plugin-asset-source-imageshop`
+`sanity install @labs-tech/sanity-plugin-asset-source-imageshop`
 
-Edit the config file found in your sanity project `./config/@keyteq/sanity-plugin-asset-source-imageshop.json` with your Image shop token ("IMAGESHOPTOKEN").
+Edit the config file found in your sanity project `./config/@labs-tech/sanity-plugin-asset-source-imageshop.json` with your Image shop token ("IMAGESHOPTOKEN").
 
 You can find the credentials in the ImageShop Admin.
 
@@ -19,7 +19,7 @@ You can find the credentials in the ImageShop Admin.
 
 There are many ways to configure the interface for image selection.
 
-All configuration can be found within `./config/@keyteq/asset-source-imageshop.json`.
+All configuration can be found within `./config/@labs-tech/asset-source-imageshop.json`.
 
 
 | Configuration key | Description |   Type         |   Default value   |
@@ -57,19 +57,19 @@ To simulate using your development version as a real module inside a studio, you
 **With the mono-repo's `test-studio`:**
 
   * Bootstrap the monorepo: `npm run bootstrap`
-  * Add `@keyteq/sanity-plugin-asset-source-imageshop` with the current version number to `package.json` in the `test-studio` root folder (but don't run `npm install` afterwards)
-  * Run `npm link @keyteq/sanity-plugin-asset-source-imageshop` inside the mono-repo's root.
-  * Add `@keyteq/sanity-plugin-asset-source-imageshop` to the list of the studios plugins in `sanity.json`.
+  * Add `@labs-tech/sanity-plugin-asset-source-imageshop` with the current version number to `package.json` in the `test-studio` root folder (but don't run `npm install` afterwards)
+  * Run `npm link @labs-tech/sanity-plugin-asset-source-imageshop` inside the mono-repo's root.
+  * Add `@labs-tech/sanity-plugin-asset-source-imageshop` to the list of the studios plugins in `sanity.json`.
   * Restart the `test-studio`
 
 **With a regular Sanity Studio:**
   * Run `npm install`
-  * Add `@keyteq/sanity-plugin-asset-source-imageshop` with the current version number to `package.json`.
-  * Run `npm link @keyteq/sanity-plugin-asset-source-imageshop`
-  * Add `@keyteq/sanity-plugin-asset-source-imageshop` to the list of the studios plugins in `sanity.json`.
+  * Add `@labs-tech/sanity-plugin-asset-source-imageshop` with the current version number to `package.json`.
+  * Run `npm link @labs-tech/sanity-plugin-asset-source-imageshop`
+  * Add `@labs-tech/sanity-plugin-asset-source-imageshop` to the list of the studios plugins in `sanity.json`.
   * Start the studio
 
-When you are done and have published your new version, you can run `npm unlink` inside this repo, and `npm unlink @keyteq/sanity-plugin-asset-source-imageshop` inside the mono-repo or studio to get back to the normal state. Then run `npm run bootstrap` for the mono-repo or `npm install` inside the regular studio to use the published version.
+When you are done and have published your new version, you can run `npm unlink` inside this repo, and `npm unlink @labs-tech/sanity-plugin-asset-source-imageshop` inside the mono-repo or studio to get back to the normal state. Then run `npm run bootstrap` for the mono-repo or `npm install` inside the regular studio to use the published version.
 
 
 ## Futher reading
