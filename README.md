@@ -1,10 +1,10 @@
 # Sanity Asset Source Plugin: ImageShop
+[![Build Status](https://travis-ci.org/Keyteq/sanity-plugin-asset-source-imageshop.svg?branch=master)](https://travis-ci.org/sanity-io/sanity-plugin-asset-source-cloudinary)
+
 
 Access and select photos from your ImageShop account within the Sanity Studio.
 
-
-[![Build Status](https://travis-ci.org/Keyteq/sanity-plugin-asset-source-imageshop.svg?branch=master)](https://travis-ci.org/sanity-io/sanity-plugin-asset-source-cloudinary)
-
+![Screenshot](screenshot.png)
 
 ## Installation
 
