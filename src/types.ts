@@ -43,7 +43,6 @@ export type ImageShopAsset = {
   }
 }
 
-
 export type AssetDocumentProps = {
   originalFileName?: string
   label?: string
@@ -55,7 +54,16 @@ export type AssetDocumentProps = {
     url?: string
   }
   creditLine?: string
+  texts?: {
+    [key in ImageShopLanguages]?: {
+      title: string
+      description: string
+      rights: string
+      credits: string
+      tags: string
+      categories: string[]
+    }
+  }
 }
-
 
 export type ImageShopIFrameEventData = [string, string, number, number]

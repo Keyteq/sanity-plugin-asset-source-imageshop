@@ -2,5 +2,10 @@
   "extends": [
     "tslint-config-standard",
     "tslint-config-prettier"
-  ]
+  ],
+  "eslintConfig": {
+    "rules": {
+      "import/no-unresolved": [2, { "ignore": ["^(all|part):"] }]
+    }
+  }
 }

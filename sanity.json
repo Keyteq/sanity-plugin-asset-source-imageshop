@@ -8,6 +8,31 @@
       "name": "part:sanity-plugin-asset-source-imageshop/image-asset-source",
       "implements": "part:@sanity/form-builder/input/image/asset-source",
       "path": "index.js"
+    },
+    {
+      "name": "part:sanity-plugin-asset-source-imageshop/array-functions",
+      "implements": "part:@sanity/form-builder/input/array/functions",
+      "path": "arrayfunctions.js"
+    },
+    {
+      "name": "part:@labs-tech/sanity-plugin-asset-source-imageshop/language-resolver",
+      "description": "override this to add a custom language resolver, e.g. based on local storage."
+    },
+    {
+      "name": "part:@labs-tech/sanity-plugin-asset-source-imageshop/language-resolver-default",
+      "implements": "part:@labs-tech/sanity-plugin-asset-source-imageshop/language-resolver",
+      "description": "Default language resolver (gets from config).",
+      "path": "languageResolver.js"
+    },
+    {
+      "name": "part:@labs-tech/sanity-plugin-asset-source-imageshop/field-mapper",
+      "description": "Field mapper for adding custom fields data to the fields array of the image object, after being uploaded"
+    },
+    {
+      "name": "part:@labs-tech/sanity-plugin-asset-source-imageshop/field-mapper-default",
+      "implements": "part:@labs-tech/sanity-plugin-asset-source-imageshop/field-mapper",
+      "description": "Default field mapper",
+      "path": "fieldMapper.js"
     }
   ]
 }

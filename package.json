@@ -1,6 +1,6 @@
 {
   "name": "@labs-tech/sanity-plugin-asset-source-imageshop",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "Sanity Studio plugin for using ImageShop to select images from",
   "keywords": [
     "sanity",
@@ -36,11 +36,9 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && npm run postcss:build && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
     "watch-tsc": "tsc --watch --module commonjs",
-    "watch-css": "postcss src/**/*.css --base src --dir dist/lib --watch",
     "watch-rollup": "rollup -c rollup.config.ts -w",
-    "postcss:build": "postcss src/**/*.css --base src --dir dist/lib",
     "watch": "rollup -c rollup.config.ts && run-p watch-*",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
@@ -77,20 +75,23 @@
     ]
   },
   "peerDependencies": {
-    "@sanity/base": ">= 0.135.0",
-    "@sanity/components": ">= 0.135.0",
-    "react": ">= 16.2",
+    "@sanity/base": "^2.13.0",
+    "@sanity/components": "^2.13.0",
+    "@sanity/ui": "^0.36.12",
+    "react": ">= 16.9",
     "react-dom": ">= 16.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^7.6.0",
-    "@sanity/base": "^0.140.36",
-    "@sanity/components": "^0.140.38",
-    "@types/jest": "^23.3.2",
+    "@sanity/base": "^2.13.0",
+    "@sanity/components": "^2.13.0",
+    "@sanity/types": "2.21.0",
+    "@sanity/ui": "^0.36.12",
     "@types/lodash.camelcase": "^4.3.6",
     "@types/node": "^10.17.4",
-    "@types/react": "^16.9.11",
+    "@types/react": "^17.0.27",
+    "@types/styled-components": "^5.1.14",
     "@types/rollup-plugin-json": "^3.0.2",
     "colors": "^1.4.0",
     "commitizen": "^4.2.1",
@@ -103,13 +104,10 @@
     "lint-staged": "^8.2.1",
     "lodash.camelcase": "^4.3.0",
     "npm-run-all": "^4.1.5",
-    "postcss-cli": "^7.1.2",
-    "postcss-import": "^12.0.1",
-    "postcss-preset-env": "^6.7.0",
     "prettier": "^1.18.2",
     "prompt": "^1.0.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "react": "^16.9",
+    "react-dom": "^16.3",
     "react-hot-loader": "^4.12.15",
     "replace-in-file": "^3.4.2",
     "rimraf": "^2.7.1",
@@ -117,7 +115,6 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-postcss-modules": "^2.0.2",
     "rollup-plugin-sourcemaps": "^0.6.2",
     "rollup-plugin-typescript2": "^0.27.2",
     "semantic-release": "^15.13.30",
@@ -132,5 +129,8 @@
     "typedoc": "^0.19.1",
     "typescript": "^4.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@sanity/ui": "^0.36.12",
+    "styled-components": "^5.2.0"
+  }
 }

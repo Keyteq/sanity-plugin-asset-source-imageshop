@@ -1,0 +1,39 @@
+{
+  "code": "SCR-2021/0255",
+  "image": {
+    "file": "https://v.imgi.no/b3aluc4brr",
+    "width": 2048,
+    "height": 0,
+    "thumbnail": "https://magik.imageshop.no/iMageWithFallbackAndMagikAndS3.aspx?d=1&t=637748928000000000&c=image%2fjpeg&base=39&h=97EA39A8CD3D1719AC9B17159CCC9082&x=0&y=0&real=&img=7890b7a5-ae75-454c-87e3-11a35fdd9510-wm.jpg"
+  },
+  "text": {
+    "no": {
+      "title": "Blade.JPEG",
+      "description": null,
+      "rights": null,
+      "credits": "",
+      "tags": "",
+      "categories": []
+    },
+    "en": {
+      "title": "Blade.JPEG",
+      "description": null,
+      "rights": null,
+      "credits": "",
+      "tags": "",
+      "categories": []
+    },
+    "sv": {
+      "title": "Blade.JPEG",
+      "description": null,
+      "rights": null,
+      "credits": "",
+      "tags": "",
+      "categories": []
+    }
+  },
+  "extraInfo": null,
+  "documentId": 2740567,
+  "AuthorName": null,
+  "InterfaceList": [{ "InterfaceID": 57332, "InterfaceName": "Private" }]
+};;2048;0

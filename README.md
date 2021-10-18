@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Keyteq/sanity-plugin-asset-source-imageshop.svg?branch=master)](https://travis-ci.org/sanity-io/sanity-plugin-asset-source-cloudinary)
 
-Imageshop is a complete Digital Asset Management system (DAM system) for organizing and sharing images, videos and documents. This plugin integrates Imageshop image picker neatly into Sanity, so that you can access all your company's images inside Sanity CMS with only one click. You can also upload photos to Imageshop without leaving Sanity
+Imageshop is a complete Digital Asset Management system (DAM system) for organizing and sharing images, videos and documents. This plugin integrates Imageshop image picker neatly into Sanity, so that you can access all your company's images inside Sanity CMS with only one click. You can also upload photos to Imageshop without leaving Sanity.
 
 ![Screenshot](screenshot.png)
 
@@ -36,8 +36,116 @@ All configuration can be found within `./config/@labs-tech/asset-source-imagesho
 | REQUIREDUPLOADFIELDS  | String indicating upload fields which are required, separated by komma. Possible values: name, description, rights, credits, tags |  string  |  |
 | UPLOADFIELDLANGUAGES  | List of languages which should be shown for name, description etc. Default = no,en. |  string  |  |
 | SANITY_ASSET_TEXT_LANGUAGE | What language to store in sanity, from the title, description and credit fields | string | "no" |
+| IMAGE_FIELDS_MAPPING | A mapping of IMAGE_SHOP_FIELD_NAME: SANITY_FIELD_NAME. Example: `{"description": "altText", "credits": "credits"}`. Fields will be imported on the image object as extra fields. Useful for e.g. altText. | object:{ string: string } | {} |
 
 
+
+## Enable multi batch upload
+
+If you have an array of type `image`, you can enable multi batch upload like this with the `options.batchUpload` set to `true`.
+
+If batchUpload is enabled, another button will appear, which allows you to select multiple images and add them to the array.
+
+```
+const imagesField = {
+  name: 'images',
+  title: 'Images',
+  type: 'array',
+  options: {
+    batchUpload: true
+  },
+  of: [
+    {
+      name: 'image',
+      type: 'image',
+      title: 'Image',
+      options: {
+        hotspot: true
+      },
+      validation: Rule => [Rule.required().error('Image is required')],
+    }
+  ]
+}
+
+```
+
+
+## Enable multi language text selection
+
+If your sanity have multiple language you need to implement a language resolver, we need to know where to get the texts from in imageshop.
+
+In your project add this:
+
+**sanity.json**
+
+add to parts:
+
+```json
+
+{
+  "name": "part:sanity-imageshop-test/language-resolver",
+  "implements": "part:@labs-tech/sanity-plugin-asset-source-imageshop/language-resolver",
+  "path": "./languageResolver.js"
+}
+```
+
+**languageResolver.js**
+
+```js
+const languageResolver = () => {
+  // This really depdends on how you have implemented some kind of language context in sanity, where user
+  // can switch language based on a select menu.
+  
+  // Here you can get the current language in .e.g localstorage in your sanity client. 
+  // Then you return a valid imageshop language based on this.
+  // example:
+  const currentLanguage = "nb";  // get from localstorage ?
+  
+  if (currentLanguage == "nb) return "no";
+  
+  // Default return some language that is valid.
+  return "no";
+}
+
+export default languageResolver
+
+```
+
+## Custom fields for multiuploaded images
+
+If you want to assign custom `fields` on the image object, you can create a custom field-mapper, which you can get texts from imageshop and then transfer the texts to the sanity image objects fields.
+
+**sanity.json**
+
+add to parts:
+
+```json
+{
+  "name": "part:sanity-imageshop-test/field-mapper",
+  "implements": "part:@labs-tech/sanity-plugin-asset-source-imageshop/field-mapper",
+  "path": "./fieldMapper.js"
+}
+```
+
+**fieldMapper.js**
+
+```js
+// Should return the asset after its transformed.
+const fieldMapper = (asset, texts) => {
+  // texts = data from imageshop. 
+  // asset = the sanity image object.
+  // Do custom mapping of fields here. Example:
+  console.log({ asset, texts })
+  
+  asset.altText = texts.no.title
+  asset.credits = texts.no.credits
+  
+  return asset
+}
+
+export default fieldMapper
+
+```
 
 
 ## Part name
