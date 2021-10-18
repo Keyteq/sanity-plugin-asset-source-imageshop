@@ -11,3 +11,8 @@ declare module 'part:@labs-tech/sanity-plugin-asset-source-imageshop/language-re
   const shim: any
   export default shim
 }
+
+declare module 'part:@sanity/form-builder/input/array/functions-default' {
+  const shim: any
+  export default shim
+}

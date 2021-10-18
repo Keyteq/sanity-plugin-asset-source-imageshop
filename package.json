@@ -51,7 +51,7 @@
     "precommit": "lint-staged",
     "travis-deploy-once": "travis-deploy-once",
     "prepublishOnly": "npm run build",
-    "prepush": "npm run test:prod && npm run build",
+    "prepush": "npm run build",
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
   },
   "lint-staged": {
@@ -75,8 +75,8 @@
     ]
   },
   "peerDependencies": {
-    "@sanity/base": "^2.13.0",
-    "@sanity/components": "^2.13.0",
+    "@sanity/base": "^2.21.0",
+    "@sanity/components": "^2.14.0",
     "@sanity/ui": "^0.36.12",
     "react": ">= 16.9",
     "react-dom": ">= 16.2"
@@ -84,8 +84,8 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^7.6.0",
-    "@sanity/base": "^2.13.0",
-    "@sanity/components": "^2.13.0",
+    "@sanity/base": "^2.21.0",
+    "@sanity/components": "^2.14.0",
     "@sanity/types": "2.21.0",
     "@sanity/ui": "^0.36.12",
     "@types/lodash.camelcase": "^4.3.6",
