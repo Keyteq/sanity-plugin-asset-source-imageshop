@@ -2,6 +2,8 @@
 
 Imageshop is a complete Digital Asset Management system (DAM system) for organizing and sharing images, videos and documents. This plugin integrates Imageshop image picker neatly into Sanity, so that you can access all your company's images inside Sanity CMS with only one click. You can also upload photos to Imageshop without leaving Sanity.
 
+> NOTE: This is a **Sanity Studio v2** legacy plugin and will no longer receive updates. If you are on the latest version of Sanity, [see the V3 plugin here](https://github.com/screentek/Sanity)
+
 ![Screenshot](screenshot.png)
 
 
